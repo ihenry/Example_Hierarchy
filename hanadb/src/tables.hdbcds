@@ -1,0 +1,19 @@
+namespace Examples."examples-db";
+
+/*@@layout{"layoutInfo":{"x":-318,"y":-185.5}}*/
+context tables {
+
+    /*@@layout{"layoutInfo":{"x":-479,"y":-197.5}}*/
+    entity HIER_ORG_STRUCTURE {
+        key ORG_ID    : Integer;
+            PARENT_ID : Integer;
+            JOB_TITLE : String(50);
+            SEX       : String(1);
+    };
+
+    /*@@layout{"layoutInfo":{"x":-874,"y":-243.5}}*/
+    entity HIER_EXPENSES {
+        ORG_ID         : Integer;
+        EXPENSE_AMOUNT : Decimal(10, 2);
+    };
+};
