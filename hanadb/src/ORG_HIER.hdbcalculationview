@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" id="Examples.examples-db::ORG_HIER" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="Organisation Hierarchy"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="Examples.examples-db::tables.HIER_ORG_STRUCTURE">
+    <resourceUri>Examples.examples-db::tables.HIER_ORG_STRUCTURE</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="ORG_ID">
+        <descriptions defaultDescription="ORG_ID"/>
+      </viewAttribute>
+      <viewAttribute id="PARENT_ID">
+        <descriptions defaultDescription="PARENT_ID"/>
+      </viewAttribute>
+      <viewAttribute id="JOB_TITLE">
+        <descriptions defaultDescription="JOB_TITLE"/>
+      </viewAttribute>
+      <viewAttribute id="SEX">
+        <descriptions defaultDescription="SEX"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Examples.examples-db::tables.HIER_ORG_STRUCTURE">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ORG_ID" source="ORG_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARENT_ID" source="PARENT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOB_TITLE" source="JOB_TITLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SEX" source="SEX"/>
+    </input>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="ORG_ID" order="1" semanticType="empty" descriptionColumnName="JOB_TITLE" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ORG_ID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="ORG_ID"/>
+    </attribute>
+    <attribute id="PARENT_ID" order="2" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PARENT_ID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PARENT_ID"/>
+    </attribute>
+    <attribute id="JOB_TITLE" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="JOB_TITLE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="JOB_TITLE"/>
+    </attribute>
+    <attribute id="SEX" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SEX"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SEX"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures>
+    <measure id="EMPLOYEE_COUNT" order="5" aggregationType="sum" measureType="simple" calculatedMeasureType="counter" aggregatable="true" datatype="INTEGER" length="">
+      <descriptions defaultDescription="EMPLOYEE_COUNT"/>
+      <exceptionAggregation>
+        <attribute attributeName="ORG_ID"/>
+      </exceptionAggregation>
+      <formula>1</formula>
+      
+      
+      </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <localDimensions>
+    <localDimension id="ORG_PARENT_HIERARCHY">
+      <attributeRef xsi:type="DataFoundation:Attribute">ORG_ID</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">PARENT_ID</attributeRef>
+      <hierarchies>
+        <hierarchy xsi:type="Dimension:ParentChildHierarchy" id="ORG_PARENT_HIERARCHY" aggregateAllNodes="true" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE" cacheEnabled="true" cycleHandling="ERROR" emptyValueIsNull="false" withRootNode="true">
+          <descriptions defaultDescription="Organisation Hierarchy"/>
+          <unassignedMemberProperties mode="FALSE"/>
+          <attributeParentPair attribute="ORG_ID" parentAttribute="PARENT_ID"/>
+        </hierarchy>
+      </hierarchies>
+    </localDimension>
+  </localDimensions>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="-32" y="233"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>   
