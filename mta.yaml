@@ -7,9 +7,7 @@ modules:
    type: hdb
    path: hanadb
    requires:
-    - name: hdi_hanadb_2
-
- 
+    - name: hdi_hanadb
 
 resources:
  - name: hdi_hanadb
@@ -20,8 +18,4 @@ resources:
       hdi-container-name: ${service-name}
    type: com.sap.xs.hdi-container
 
- - name: hdi_hanadb_2
-   properties:
-      hdi-container-name_2: ${service-name}
-   type: com.sap.xs.hdi-container
 

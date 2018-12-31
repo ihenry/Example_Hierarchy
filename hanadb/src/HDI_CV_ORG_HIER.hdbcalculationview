@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" id="Examples.examples-db::ORG_HIER" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
-<descriptions defaultDescription="Organisation Hierarchy"/>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" id="Examples::HDI_CV_ORG_HIER" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="Organisation Hierarchy">
+  <comment text="Hello"/>
+</descriptions>
 <localVariables/>
 <variableMappings/>
 <dataSources>
-  <DataSource id="Examples.examples-db::tables.HIER_ORG_STRUCTURE">
-    <resourceUri>Examples.examples-db::tables.HIER_ORG_STRUCTURE</resourceUri>
+  <DataSource id="Examples::H_ORG_STRUCTURE">
+    <resourceUri>Examples::H_ORG_STRUCTURE</resourceUri>
   </DataSource>
 </dataSources>
 <calculationViews>
@@ -26,7 +28,7 @@
     </viewAttributes>
     <calculatedViewAttributes/>
     <restrictedViewAttributes/>
-    <input node="Examples.examples-db::tables.HIER_ORG_STRUCTURE">
+    <input node="Examples::H_ORG_STRUCTURE">
       <mapping xsi:type="Calculation:AttributeMapping" target="ORG_ID" source="ORG_ID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PARENT_ID" source="PARENT_ID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOB_TITLE" source="JOB_TITLE"/>
@@ -64,6 +66,7 @@
       <formula>1</formula>
       
       
+      
       </measure>
   </calculatedMeasures>
   <restrictedMeasures/>
@@ -93,4 +96,4 @@
     </shape>
   </shapes>
 </layout>
-</Calculation:scenario>   
+</Calculation:scenario>
