@@ -1,4 +1,4 @@
-# Haas_Examples
-HANA as a Service Examples
+# Example Hierarchy
+Example Parent Child Hierarchy
 
 This is from the WebIDE

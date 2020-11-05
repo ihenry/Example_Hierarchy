@@ -6,34 +6,20 @@
 <localVariables/>
 <variableMappings/>
 <dataSources>
-  <DataSource id="Examples::H_ORG_STRUCTURE">
-    <resourceUri>Examples::H_ORG_STRUCTURE</resourceUri>
+  <DataSource id="H_ORG_STRUCTURE">
+    <resourceUri>H_ORG_STRUCTURE</resourceUri>
   </DataSource>
 </dataSources>
 <calculationViews>
   <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
     <viewAttributes>
-      <viewAttribute id="ORG_ID">
-        <descriptions defaultDescription="ORG_ID"/>
-      </viewAttribute>
-      <viewAttribute id="PARENT_ID">
-        <descriptions defaultDescription="PARENT_ID"/>
-      </viewAttribute>
-      <viewAttribute id="JOB_TITLE">
-        <descriptions defaultDescription="JOB_TITLE"/>
-      </viewAttribute>
-      <viewAttribute id="SEX">
-        <descriptions defaultDescription="SEX"/>
-      </viewAttribute>
+      <viewAttribute id="ORG_ID"/>
+      <viewAttribute id="PARENT_ID"/>
+      <viewAttribute id="JOB_TITLE"/>
+      <viewAttribute id="SEX"/>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <restrictedViewAttributes/>
-    <input node="Examples::H_ORG_STRUCTURE">
-      <mapping xsi:type="Calculation:AttributeMapping" target="ORG_ID" source="ORG_ID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="PARENT_ID" source="PARENT_ID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="JOB_TITLE" source="JOB_TITLE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="SEX" source="SEX"/>
-    </input>
+    <input node="H_ORG_STRUCTURE"/>
   </calculationView>
 </calculationViews>
 <logicalModel id="Projection_1">

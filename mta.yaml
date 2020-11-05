@@ -13,9 +13,10 @@ resources:
  - name: hdi_hanadb
    parameters:
       config:
-         schema: HAAS_EXAMPLES
+         schema: EXAMPLE_HIERARCHY
+         database_id: 1b628954-30ce-428c-9ffe-22a94637dc38
+         makeUniqueName: false
+      service-name: EXAMPLE_HIERARCHY
    properties:
       hdi-container-name: ${service-name}
    type: com.sap.xs.hdi-container
-
-

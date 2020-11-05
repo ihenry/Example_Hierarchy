@@ -3,10 +3,10 @@
 	
 	"imports": [
 		{
-			"target_table": "Examples::H_ORG_STRUCTURE",
+			"target_table": "H_ORG_STRUCTURE",
 			"source_data": {
 			"data_type": "CSV",
-				"file_name": "Examples::H_ORG_STRUCTURE.csv",
+				"file_name": "H_ORG_STRUCTURE.csv",
 				"has_header": true
 			},
 			"import_settings": {
@@ -19,10 +19,10 @@
 			}
 		},
 		{
-			"target_table": "Examples::H_EXPENSES",
+			"target_table": "H_EXPENSES",
 			"source_data": {
 			"data_type": "CSV",
-				"file_name": "Examples::H_EXPENSES.csv",
+				"file_name": "H_EXPENSES.csv",
 				"has_header": true
 			},
 			"import_settings": {

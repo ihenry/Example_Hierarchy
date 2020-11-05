@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" id="EXPENSES" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="EXPENSES"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="H_EXPENSES">
+    <resourceUri>H_EXPENSES</resourceUri>
+  </DataSource>
+  <DataSource id="H_ORG_STRUCTURE">
+    <resourceUri>H_ORG_STRUCTURE</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="ORG_ID"/>
+      <viewAttribute id="EXPENSE_AMOUNT"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="H_EXPENSES"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="ORG_ID"/>
+      <viewAttribute id="PARENT_ID"/>
+      <viewAttribute id="JOB_TITLE"/>
+      <viewAttribute id="DEPARTMENT"/>
+      <viewAttribute id="SEX"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="H_ORG_STRUCTURE"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="rightOuter">
+    <viewAttributes>
+      <viewAttribute id="EXPENSE_AMOUNT" aggregationType="sum"/>
+      <viewAttribute id="ORG_ID" aggregationType="sum"/>
+      <viewAttribute id="PARENT_ID" aggregationType="sum"/>
+      <viewAttribute id="JOB_TITLE"/>
+      <viewAttribute id="DEPARTMENT"/>
+      <viewAttribute id="SEX"/>
+      <viewAttribute hidden="true" id="JOIN$ORG_ID$ORG_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXPENSE_AMOUNT" source="EXPENSE_AMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ORG_ID$ORG_ID" source="ORG_ID"/>
+    </input>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ORG_ID" source="ORG_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARENT_ID" source="PARENT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOB_TITLE" source="JOB_TITLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENT" source="DEPARTMENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SEX" source="SEX"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ORG_ID$ORG_ID" source="ORG_ID"/>
+    </input>
+    <joinAttribute name="JOIN$ORG_ID$ORG_ID"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="ORG_ID" order="2" displayAttribute="false" attributeHierarchyActive="false" descriptionColumnName="JOB_TITLE">
+      <descriptions defaultDescription="ORG_ID"/>
+      <keyMapping columnObjectName="Join_1" columnName="ORG_ID"/>
+    </attribute>
+    <attribute id="PARENT_ID" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PARENT_ID"/>
+      <keyMapping columnObjectName="Join_1" columnName="PARENT_ID"/>
+    </attribute>
+    <attribute id="JOB_TITLE" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="JOB_TITLE"/>
+      <keyMapping columnObjectName="Join_1" columnName="JOB_TITLE"/>
+    </attribute>
+    <attribute id="DEPARTMENT" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DEPARTMENT"/>
+      <keyMapping columnObjectName="Join_1" columnName="DEPARTMENT"/>
+    </attribute>
+    <attribute id="SEX" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SEX"/>
+      <keyMapping columnObjectName="Join_1" columnName="SEX"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="EXPENSE_AMOUNT" order="1" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="EXPENSE_AMOUNT"/>
+      <measureMapping columnObjectName="Join_1" columnName="EXPENSE_AMOUNT"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures>
+    <measure id="EMPLOYEE_COUNT" order="7" aggregationType="sum" measureType="simple" calculatedMeasureType="counter" aggregatable="true" datatype="BIGINT" length="">
+      <descriptions defaultDescription="EMPLOYEE_COUNT"/>
+      <exceptionAggregation>
+        <attribute attributeName="ORG_ID"/>
+      </exceptionAggregation>
+      <formula>1</formula>
+    </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <localDimensions>
+    <localDimension id="ORG_HIER">
+      <attributeRef xsi:type="DataFoundation:Attribute">ORG_ID</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">PARENT_ID</attributeRef>
+      <hierarchies>
+        <hierarchy xsi:type="Dimension:ParentChildHierarchy" id="ORG_HIER" aggregateAllNodes="false" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE_IF_DEFINED" cacheEnabled="true" cycleHandling="BREAKUP" emptyValueIsNull="false">
+          <descriptions defaultDescription="ORG_HIER"/>
+          <unassignedMemberProperties mode="FALSE"/>
+          <attributeParentPair attribute="ORG_ID" parentAttribute="PARENT_ID"/>
+        </hierarchy>
+      </hierarchies>
+    </localDimension>
+  </localDimensions>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="376"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="376"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="136"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
